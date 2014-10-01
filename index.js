@@ -13,7 +13,7 @@ exports.register = function (options) {
   }
 
   glob.sync(options.pattern).forEach(function (file) {
-    var route = require(route);
+    var route = require(file);
     self.server.route(route);
   });
 
