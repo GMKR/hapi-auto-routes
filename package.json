@@ -1,0 +1,27 @@
+{
+  "name": "hapi-auto-routes",
+  "version": "1.0.0",
+  "description": "Automatically register Hapi Routes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GMKR/hapi-auto-routes.git"
+  },
+  "keywords": [
+    "hapi",
+    "hapijs",
+    "routes"
+  ],
+  "author": "Mohan <mohan@qshark.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMKR/hapi-auto-routes/issues"
+  },
+  "homepage": "https://github.com/GMKR/hapi-auto-routes",
+  "dependencies": {
+    "glob": "^4.0.6"
+  }
+}
