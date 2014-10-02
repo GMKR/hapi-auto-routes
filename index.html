@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Hapi Auto Routes by GMKR</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Hapi Auto Routes</h1>
+          <h2>Simple module to register Hapi Routes automatically.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/GMKR/hapi-auto-routes/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/GMKR/hapi-auto-routes/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/GMKR/hapi-auto-routes" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="hapi-auto-routes" class="anchor" href="#hapi-auto-routes"><span class="octicon octicon-link"></span></a>hapi-auto-routes</h1>
+
+<p>hapi-auto-routes allows you to automatically register all routes from matching files.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><code>npm install hapi-auto-routes</code></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h4>
+<a name="serverjs" class="anchor" href="#serverjs"><span class="octicon octicon-link"></span></a>server.js</h4>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">Hapi</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'hapi'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">Hapi</span><span class="p">.</span><span class="nx">Server</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">routes</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'hapi-auto-routes'</span><span class="p">);</span>
+
+<span class="c1">//Register all routes from files matching pattern *.route.js</span>
+<span class="nx">routes</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">server</span><span class="p">).</span><span class="nx">register</span><span class="p">({</span>
+  <span class="nx">pattern</span><span class="o">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'*.route.js'</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
+
+<h4>
+<a name="indexroutejs" class="anchor" href="#indexroutejs"><span class="octicon octicon-link"></span></a>index.route.js</h4>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">indexRoute</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">method</span><span class="o">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="nx">path</span><span class="o">:</span> <span class="s1">'/'</span><span class="p">,</span>
+  <span class="nx">handler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">reply</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">helloRoute</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">method</span><span class="o">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="nx">path</span><span class="o">:</span> <span class="s1">'/hello'</span><span class="p">,</span>
+  <span class="nx">handler</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">reply</span><span class="p">({</span><span class="nx">succes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">'hello world!'</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="nx">indexRoute</span><span class="p">,</span>
+  <span class="nx">helloRoute</span>
+<span class="p">];</span>
+</pre></div>
+        </section>
+
+        <footer>
+          Hapi Auto Routes is maintained by <a href="https://github.com/GMKR">GMKR</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
