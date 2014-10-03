@@ -7,11 +7,11 @@ hapi-auto-routes allows you to automatically register all routes from matching f
 ####server.js
 ```javascript
 var Hapi = require('hapi');
-var server = Hapi.Server(8080);
+var server = new Hapi.Server(8080);
 var routes = require('hapi-auto-routes');
 
 //Register all routes from files matching pattern *.route.js
-routes.load(server).register({
+routes.bind(server).register({
   pattern: __dirname + '*.route.js',
 });
 
