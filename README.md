@@ -40,3 +40,5 @@ module.exports = [
   helloRoute
 ];
 ```
+
+inspired by [Mongoload](https://github.com/klei/mongoload)
