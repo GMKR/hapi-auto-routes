@@ -2,43 +2,50 @@
 hapi-auto-routes allows you to automatically register all routes from matching files.
 
 ##Installation
-`npm install hapi-auto-routes`
+`npm install hapi-auto-routes --save`
 ##Usage
 ####server.js
 ```javascript
-var Hapi = require('hapi');
-var server = new Hapi.Server(8080);
-var routes = require('hapi-auto-routes');
+const Hapi = require('hapi')
+const server = new Hapi.Server()
+const routes = require('../index')
+server.connection({port: 3000});
 
 //Register all routes from files matching pattern *.route.js
 routes.bind(server).register({
   pattern: __dirname + '*.route.js',
 });
 
-server.start();
+server.start((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log(`Server running at: ${server.info.uri}`);
+});
 ```
 ####index.route.js
 ```javascript
-var indexRoute = {
+const helloOne = {
   method: 'GET',
-  path: '/',
-  handler: function (request, reply) {
-    reply({success: true});
-  },
-};
-
-var helloRoute = {
-  method: 'GET',
-  path: '/hello',
-  handler: function (request, reply) {
-    reply({succes: true, message: 'hello world!'});
+  path: '/hello-one',
+  config: {
+    handler: (request, reply) => {
+      return reply('Hello world one!')
+    }
   }
 };
 
-module.exports = [
-  indexRoute,
-  helloRoute
-];
+const helloTwo = {
+  method: 'GET',
+  path: '/hello-two',
+  config: {
+    handler: (request, reply) => {
+      return reply('Hello world two!')
+    }
+  }
+};
+
+module.exports = [helloOne, helloTwo]
 ```
 
 inspired by [Mongoload](https://github.com/klei/mongoload)
